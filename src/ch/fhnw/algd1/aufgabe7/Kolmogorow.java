@@ -25,7 +25,10 @@ public class Kolmogorow
         }
     }
 
-
+    /**
+     * Generates a console output like 10011100000111111110000000..... with te length of stringLength
+     * @param stringLength
+     */
     public void generateString2(int stringLength)
     {
         int totalNumberCounter = 0;
@@ -55,19 +58,28 @@ public class Kolmogorow
 
     }
 
-    public void generateString3()
+    /**
+     * Generates
+     * @param stringLength
+     */
+    public void generateString3(int stringLength)
     {
-
+        // Auch nach längerem betrachten und suche im Internet konnte ich bei dieser Folge keine
+        // regelmässigkeit finden.
     }
 
-
-    public int fibonacciNumber(int n) {
+    /**
+     * Calculates the fibonacciNumber
+     * @param n
+     * @return
+     */
+    private int fibonacciNumber(int n) {
         if(n == 0) {
             return 0;
         } else if (n == 1) {
             return 1;
         } else {
-            return fibonacciNumber(n-1) + fibonacciNumber(n-2); //der rekursive Aufruf
+            return fibonacciNumber(n-1) + fibonacciNumber(n-2);
         }
     }
 
