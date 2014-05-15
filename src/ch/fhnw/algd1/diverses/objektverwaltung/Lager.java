@@ -26,7 +26,7 @@ public class Lager implements ILager {
     }
 
     @Override
-    public int insert(Object obj)
+    public void insert(Object obj)
     {
         if (m_free < lagerSpaces.length)
         {
@@ -35,7 +35,7 @@ public class Lager implements ILager {
             int i = m_free+1;
             while (lagerSpaces[i] != null)
             {
-
+                System.out.print(" ");
             }
 
         }
