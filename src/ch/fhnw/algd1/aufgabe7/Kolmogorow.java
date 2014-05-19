@@ -3,7 +3,8 @@ package ch.fhnw.algd1.aufgabe7;
 public class Kolmogorow
 {
     /**
-     * Generates a console output like 10100100010000..... with the length of stringLength
+     * Generates a console output like 10100100010000..... with the length
+     * of stringLength
      * @param stringLength
      */
     public void generateString1(int stringLength)
@@ -26,7 +27,8 @@ public class Kolmogorow
     }
 
     /**
-     * Generates a console output like 10011100000111111110000000..... with te length of stringLength
+     * Generates a console output like 10011100000111111110000000..... with the length
+     * of stringLength
      * @param stringLength
      */
     public void generateString2(int stringLength)
@@ -42,20 +44,15 @@ public class Kolmogorow
             while (totalNumberCounter < stringLength && innerCounter < fibNumber)
             {
                 if (switcher)
-                {
                     System.out.print("1");
-                }
                 else
-                {
                     System.out.print("0");
-                }
                 innerCounter++;
                 totalNumberCounter++;
             }
             counter++;
             switcher = !switcher;
         }
-
     }
 
     /**
@@ -64,12 +61,12 @@ public class Kolmogorow
      */
     public void generateString3(int stringLength)
     {
-        // Auch nach längerem betrachten und suche im Internet konnte ich bei dieser Folge keine
-        // regelmässigkeit finden.
+        // Auch nach längerem betrachten und suche im Internet konnte ich bei dieser
+        // Folge keine regelmässigkeit finden.
     }
 
     /**
-     * Calculates the fibonacciNumber
+     * Calculates the fibonacciNumber (methode ist aus dem internet von einem forum)
      * @param n
      * @return
      */
@@ -82,6 +79,4 @@ public class Kolmogorow
             return fibonacciNumber(n-1) + fibonacciNumber(n-2);
         }
     }
-
-
 }
