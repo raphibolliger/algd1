@@ -11,13 +11,24 @@ public class Skyscrapers {
 
     public void fillField(int x, int y)
     {
-        if ()
+        if (x == skyscrapersField.length && y == skyscrapersField.length)
+        {
+            printField();
+            return;
+        }
+        else
+        {
+            if (check())
+                fillField(x+1, y+1);
+            else
+                fillField(x-1, y-1);
+        }
 
     }
 
     public boolean check()
     {
-
+        return true;
     }
 
     public void printField()

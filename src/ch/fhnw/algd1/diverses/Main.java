@@ -28,6 +28,14 @@ public class Main {
         selectionSort(selectionSortTest);
         insertionSort(insertionSortTest);
 
+        int[] a1 = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17};
+        int[] a2 = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17};
+
+        Merge merge = new Merge(a1, a2);
+
+        int result[] = merge.mergeArrays();
+
+        System.out.println(result);
     }
 
 

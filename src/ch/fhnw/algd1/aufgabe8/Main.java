@@ -1,7 +1,5 @@
 package ch.fhnw.algd1.aufgabe8;
 
-import ch.fhnw.algd1.aufgabe4.Skyscrapers;
-
 public class Main {
 
     public static void main(String[] args)
@@ -11,8 +9,8 @@ public class Main {
         Skyscrapers skyscrapers = new Skyscrapers(test);
         skyscrapers.printField();
 
-        Zahlenquadrat zahlenquadrat = new Zahlenquadrat();
-        zahlenquadrat.CreateArray();
+        //Zahlenquadrat zahlenquadrat = new Zahlenquadrat();
+        //zahlenquadrat.CreateArray();
     }
 
 }
