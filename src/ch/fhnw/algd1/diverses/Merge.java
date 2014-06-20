@@ -1,8 +1,5 @@
 package ch.fhnw.algd1.diverses;
 
-/**
- * Created by raphi on 10.06.14.
- */
 public class Merge {
 
     private int[] array1;
