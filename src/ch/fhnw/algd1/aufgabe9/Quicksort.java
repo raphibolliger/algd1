@@ -61,15 +61,20 @@ public class Quicksort {
             random[i] = Math.random();
         }
 
-        // random inverse array
-        
+        // random reverse sorted array
+        int countPlus = 0;
+        double[] reverseRandomSorted = new double[count];
+        for (int i = count-1; i >= 0; i--)
+        {
+            reverseRandomSorted[countPlus] = random[i];
+            countPlus++;
+        }
 
         // same values
         double[] same = new double[count];
 
         long start = 0;
         long end = 0;
-
 
         // Sort random
         start = System.currentTimeMillis();
@@ -92,8 +97,12 @@ public class Quicksort {
         long zeit3 = end - start;
         System.out.println("Sortedzeit: "+ zeit3);
 
-        // Sort inverse
-
+        // Sort reverse sorted array
+        start = System.currentTimeMillis();
+        quicksort.quickSort(reverseRandomSorted, 0, reverseRandomSorted.length-1);
+        end = System.currentTimeMillis();
+        long zeit4 = end - start;
+        System.out.println("ReverseSortedzeit: "+ zeit4);
     }
 
 

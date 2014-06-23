@@ -1,57 +1,62 @@
 package ch.fhnw.algd1.aufgabe9;
 
+import java.io.*;
 import java.util.Arrays;
 import java.util.Random;
 
 public class Boersenkurse {
 
-    public float calculateSum(float[] array)
+    private int posStart = 0;
+    private int posEnd = 0;
+
+    public int getPosStart()
+    {
+        return posStart;
+    }
+
+    public int getPosEnd()
+    {
+        return posEnd;
+    }
+
+    public float calculateInOut(float[] array)
     {
         if (array.length == 1)
         {
             return array[0];
         }
 
-        System.out.println(Arrays.toString(array));
-
         float[] a1 = Arrays.copyOfRange(array, 0, array.length/2);
         float[] a2 = Arrays.copyOfRange(array, (array.length/2), array.length);
 
-        float i1 = calculateSum(a1);
-        float i2 = calculateSum(a2);
+        float i1 = calculateInOut(a1);
+        float i2 = calculateInOut(a2);
 
         float lsum = 0;
         float lmax = 0;
-        int posStart = 0;
         for (int i = (array.length/2)-1; i >= 0; i--)
         {
             lsum += array[i];
             if (lsum > lmax)
             {
                 lmax = lsum;
-                posStart = i;
+                this.posStart = i;
             }
         }
 
-        //System.out.println("Start: "+posStart);
-
         float rsum = 0;
         float rmax = 0;
-        int posEnd = 0;
         for (int i = array.length/2; i < array.length; i++)
         {
             rsum += array[i];
             if (rsum > rmax)
             {
                 rmax = rsum;
-                posEnd = i;
+                this.posEnd = i;
             }
         }
 
-        //System.out.println("End: "+posEnd);
-
         float i3 = lmax+rmax;
-
         float maxi1i2 = Math.max(i1, i2);
         return Math.max(maxi1i2, i3);
     }
@@ -75,29 +80,54 @@ public class Boersenkurse {
         return array;
     }
 
-    public void importData()
+    public float[] importData()
     {
-
+        float[] array = new float[0];
+        ObjectInputStream inputStream = null;
+        try {
+            inputStream = new ObjectInputStream(new FileInputStream("/Daten/boersenkurse.dat"));
+            array = (float[])inputStream.readObject();
+        }
+        catch (ClassNotFoundException e1)
+        {
+            e1.printStackTrace();
+        }
+        catch (IOException e2)
+        {
+            e2.printStackTrace();
+        }
+        return array;
     }
 
-    public void exportData()
+    public void exportData(float[] array)
     {
-
+        try
+        {
+            ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("/Daten/boersenkurse.dat"));
+            outputStream.writeObject(array);
+        }
+        catch (FileNotFoundException e1)
+        {
+            e1.printStackTrace();
+        }
+        catch (IOException e2)
+        {
+            e2.printStackTrace();
+        }
     }
 
     public static void main(String[] args)
     {
-        int[] kurse = {31, -41, 59, 26, -53, 58, 97, -93, -23, 84};
-        int[] kurse1 = {300, -10, -10, -10, -10, -10, -10, -10, -10, 100};
-
-
-
-
         Boersenkurse boersenkurse = new Boersenkurse();
-        float[] kurse2 = boersenkurse.generateValues(100000);
+        float[] testKurse = {1.2f, -4.5f, 5.6f, 3.4f, -2.6f, 4.7f, 5.7f, -1.6f, 4.6f, -12.3f};
+        float[] kurse = boersenkurse.generateValues(100000);
 
+        boersenkurse.exportData(kurse);
+        float[] arrayImport = boersenkurse.importData();
 
-        System.out.println(boersenkurse.calculateSum(kurse2));
+        System.out.println(boersenkurse.calculateInOut(kurse));
+        System.out.println("Einstieg: " + boersenkurse.getPosStart());
+        System.out.print("Ausstieg: "+ boersenkurse.getPosEnd());
     }
 
 }
