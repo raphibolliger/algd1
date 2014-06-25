@@ -2,48 +2,39 @@ package ch.fhnw.algd1.aufgabe9;
 
 import java.util.Random;
 
-public class Quicksort {
+public class QuicksortNew {
+
+    private Random rand = new Random();
 
     public void quickSort(double[] array, int l, int r)
     {
         if (l < r)
         {
-            int p = divideArray(array, l, r);
-            quickSort(array, l, p - 1);
-            quickSort(array, p, r);
+            double pivot = array[randomInt(l, r)];
+
+            int i = l;
+            int j = r;
+
+            do {
+                while (array[i] < pivot) i++;
+                while (array[j] > pivot) j--;
+                if (i <= j)
+                {
+                    double temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp;
+                    i++;
+                    j--;
+                }
+            } while (i <= j);
+
+            quickSort(array, l, i - 1);
+            quickSort(array, i, r);
         }
     }
 
-    private int divideArray(double[] array, int l, int r)
+    private int randomInt(int min, int max)
     {
-        int i = l;
-        int j = r;
-        double p = array[randomInt(l, r)];
-
-        do {
-            while (array[i] < p) i++;
-            while (array[j] > p) j--;
-            if (i <= j)
-            {
-                swap(array, i, j);
-                i++;
-                j--;
-            }
-        } while (i < j);
-
-        return i;
-    }
-
-    public void swap(double[] array, int i, int j)
-    {
-        double temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-
-    public static int randomInt(int min, int max)
-    {
-        Random rand = new Random();
         int randomNum = rand.nextInt((max - min) + 1) + min;
         return randomNum;
     }
@@ -61,7 +52,9 @@ public class Quicksort {
     {
         final int count = 1000000;
 
-        Quicksort quicksort = new Quicksort();
+        double[] test = {2.3, 1.2, 4.3, 2.2, 5.8, 7.8, 1.4, 2.1 };
+
+        QuicksortNew quicksort = new QuicksortNew();
 
         // random double array
         double[] random = new double[count];
@@ -84,34 +77,44 @@ public class Quicksort {
 
         long start = 0;
         long end = 0;
+        boolean isSorted = false;
 
         // Sort random
+        System.out.println(quicksort.isSorted(random));
+
         start = System.currentTimeMillis();
         quicksort.quickSort(random, 0, random.length-1);
         end = System.currentTimeMillis();
+        isSorted = quicksort.isSorted(random);
         long zeit1 = end - start;
-        System.out.println("Randomzeit: "+ zeit1);
-        System.out.println(quicksort.isSorted(random));
+        System.out.println("Randomzeit: "+ zeit1 +" / Sortiert: " + isSorted);
 
         // Sort same
         start = System.currentTimeMillis();
         quicksort.quickSort(same, 0, random.length-1);
         end = System.currentTimeMillis();
+        isSorted = quicksort.isSorted(same);
         long zeit2 = end - start;
-        System.out.println("Samezeit: "+ zeit2);
+        System.out.println("Samezeit: "+ zeit2 +" / Sortiert: " + isSorted);
 
         // Sort sortet
         start = System.currentTimeMillis();
         quicksort.quickSort(random, 0, random.length-1);
         end = System.currentTimeMillis();
+        isSorted = quicksort.isSorted(random);
         long zeit3 = end - start;
-        System.out.println("Sortedzeit: "+ zeit3);
+        System.out.println("Sortedzeit: "+ zeit3 +" / Sortiert: " + isSorted);
 
         // Sort reverse sorted array
         start = System.currentTimeMillis();
         quicksort.quickSort(reverseRandomSorted, 0, reverseRandomSorted.length-1);
         end = System.currentTimeMillis();
+        isSorted = quicksort.isSorted(reverseRandomSorted);
         long zeit4 = end - start;
-        System.out.println("ReverseSortedzeit: "+ zeit4);
+        System.out.println("ReverseSortedzeit: "+ zeit4 +" / Sortiert: " + isSorted);
+
     }
+
+
+
 }
